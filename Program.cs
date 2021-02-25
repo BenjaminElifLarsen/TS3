@@ -77,7 +77,7 @@ namespace TS3
                 serialPort.Write("1");
                 Thread.Sleep(1500);
                 byte[] dataArduino = new byte[1];
-                serialPort.ReadTimeout = 1500;
+                serialPort.ReadTimeout = 2500;
                 try
                 {
                     serialPort.Read(dataArduino, 0, 1);
@@ -123,7 +123,7 @@ namespace TS3
                 string info = Encoding.ASCII.GetString(bytelist.ToArray(), 0, bytelist.Count);
                 string[] users = info.Split('|');
                 int pos = 0;
-                Console.WriteLine(info);
+                Console.WriteLine($"Fandt {users.Length} brugere");
                 foreach(string user in users) 
                 {
                     pos++;
