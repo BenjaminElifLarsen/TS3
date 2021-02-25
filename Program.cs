@@ -51,7 +51,7 @@ namespace TS3
             Console.WriteLine("Establishing Connection"); //will return a string that can be used to find the different client IDs
             message = $"connect address={information[1]} " +
                 $"password={information[2]} " +
-                $"nickname={information[3]}" +
+                $"nickname={information[3]} " +
                 $"channel={"Vejkanalen"}\n"; //argument 1 2 3
             data = Encoding.ASCII.GetBytes(message);
             networkStream.Write(data, 0, data.Length);
