@@ -48,15 +48,19 @@ namespace TS3
             Console.WriteLine();
 
 
-            Console.WriteLine("Connection"); //will return a string that can be used to find the different client IDs
+            Console.WriteLine("Establishing Connection"); //will return a string that can be used to find the different client IDs
             message = $"connect address={information[1]} password={information[2]} nickname={information[3]}\n"; //argument 1 2 3
             data = Encoding.ASCII.GetBytes(message);
             networkStream.Write(data, 0, data.Length);
             Thread.Sleep(1000);
             data = new byte[256];
             bytes = networkStream.Read(data, 0, data.Length);
+            Console.WriteLine("Received");
             Console.WriteLine(Encoding.ASCII.GetString(data, 0, bytes));
-            Console.WriteLine();
+            Console.WriteLine("Hvis der er error ids som ikke er lig med 0, betyder det at programmet ikke har lykkes at oprette forbindelse til serveren." +
+                Environment.NewLine + "Tjek om kodeord og brugernavn er korrekt. " +
+                Environment.NewLine + "Tjek også om brugeren allerede har oprettet forbindelse til serveren. Hvis de har, sluk for forbindelsen til serveren og start dette program igen.");
+            
 
             string[] test = SerialPort.GetPortNames();
             /*need to get the port the arduino is connected too. Could do something similar to the python program
@@ -78,8 +82,18 @@ namespace TS3
                 {
                     serialPort.Read(dataArduino, 0, 1);
                     position = i;
+                    Console.WriteLine($"Prøver at forbinde til: {test[i]}");
                     if (dataArduino[0] == 1)
+                    {
+                        Console.WriteLine("Arudiono var fundet");
                         break;
+                    }
+                    else if (i == test.Length - 1)
+                    {
+                        Console.WriteLine("Arduino var ikke fundet. Tryk Enter for at afsluttet programmet.");
+                        Console.ReadLine();
+                        Environment.Exit(1);
+                    }
                 }
                 catch
                 {
@@ -109,6 +123,7 @@ namespace TS3
                 string info = Encoding.ASCII.GetString(bytelist.ToArray(), 0, bytelist.Count);
                 string[] users = info.Split('|');
                 int pos = 0;
+                Console.WriteLine(info);
                 foreach(string user in users) 
                 {
                     pos++;
