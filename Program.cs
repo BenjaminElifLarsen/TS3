@@ -19,11 +19,13 @@ namespace TS3
         {
             if(args.Length >= 0 && args.Length < 4)
             {
-                information[0] = "6R6Z-74TE-59CF-MRJ5-2RO2-HOD9";
-                information[1] = "10.11.5.197";
-                information[2] = "+cFwYoa5";
-                information[3] = "ClientQuery";
+                //information[0] = "6R6Z-74TE-59CF-MRJ5-2RO2-HOD9";
+                //information[1] = "10.11.5.197";
+                //information[2] = "+cFwYoa5";
+                //information[3] = "ClientQuery";
                 Console.WriteLine("TS3.exe key server password userName");
+                Console.WriteLine("Tryk Enter for at afsluttet programmet.");
+                Console.ReadLine();
             }
             else if(args.Length == 4)
             {
